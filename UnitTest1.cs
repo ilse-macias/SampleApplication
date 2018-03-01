@@ -13,6 +13,16 @@ namespace SampleApplication
         SampleApplicationPage sampleApplicationPage;
         TestUser testUser;
 
+        private static void AssertPage1(UltimateQAHomePage ultimateQAHomePage)
+        {
+            Assert.IsTrue(ultimateQAHomePage.IsVisible, "UltimateQA home page was not visible.");
+        }
+
+        private static void AssertPageVisible2(UltimateQAHomePage ultimateQAHomePage)
+        {
+            Assert.IsFalse(!ultimateQAHomePage.IsVisible, "UltimateQA home page was not visible.");
+        }
+
         [TestInitialize]
         public void SetUp()
         {
@@ -25,27 +35,35 @@ namespace SampleApplication
 
             testUser.FirstName = "Hello";
             testUser.LastName = "Macías";
+            testUser.GenderType = Gender.Other;
         }
 
         [TestMethod]
-        //[TestCategory("SampleApplicationOne")]
+        [Description("Validate that user is able to fill out the form successfully using valid data.")]
         public void Sprint1()
         {
             Assert.IsTrue(sampleApplicationPage.IsVisible);
 
             var ultimateQAHomePage = sampleApplicationPage.FillOutFormAndSubmit(testUser);
-            Assert.IsTrue(ultimateQAHomePage.IsVisible);
-            
+            AssertPage1(ultimateQAHomePage);
         }
 
         [TestMethod]
-        //[TestCategory("SampleApplicationOne")]
+        [Description("Fake 2nd test.")]
         public void Sprint2()
         {
             Assert.IsTrue(sampleApplicationPage.IsVisible);
 
             var ultimateQAHomePage = sampleApplicationPage.FillOutFormAndSubmit(testUser);
-            Assert.IsTrue(ultimateQAHomePage.IsVisible);
+            AssertPageVisible2(ultimateQAHomePage);
+        }
+
+        [TestMethod]
+        [Description("Validate that when selecting the 'Other' gender type, the from is submitted successfully.")]
+        public void Sprint3()
+        {
+            var ultimateQAHomePage = sampleApplicationPage.FillOutFormAndSubmit(testUser);
+            AssertPageVisible2(ultimateQAHomePage);
         }
 
         [TestCleanup]

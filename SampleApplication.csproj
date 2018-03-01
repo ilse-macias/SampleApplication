@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseSampleApplicationPage.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Gender.cs" />
     <Compile Include="SampleApplicationPage.cs" />
     <Compile Include="TestUser.cs" />
     <Compile Include="UltimateQAHomePage.cs" />
